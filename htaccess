@@ -1,0 +1,18 @@
+Options -Indexes
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^uploads/.*\.php$ - [F,L]
+  RewriteRule ^output/.*\.php$  - [F,L]
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(mp3|wav|ogg|m4a|flac|aac|opus|aiff)$">
+    Header set Content-Disposition "attachment"
+    Header set X-Content-Type-Options "nosniff"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_php.c>
+  php_value upload_max_filesize 100M
+  php_value post_max_size 105M
+  php_value max_execution_time 180
+  php_value memory_limit 256M
+</IfModule>
